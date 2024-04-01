@@ -21,8 +21,9 @@ WORKDIR /app
 COPY package.json ./
 
 # If you want to build docker in China
-# RUN npm config set registry https://registry.npmmirror.com/
+RUN npm config set registry https://registry.npmmirror.com/
 RUN pnpm i
+ENV NEXT_PUBLIC_BASE_PATH="wychat"
 
 COPY . .
 RUN pnpm run build:docker # run build standalone for docker version
@@ -55,6 +56,8 @@ EXPOSE 3210
 # set hostname to localhost
 ENV HOSTNAME "0.0.0.0"
 ENV PORT=3210
+
+ENV NEXT_PUBLIC_BASE_PATH="wychat"
 
 # General Variables
 ENV ACCESS_CODE ""
